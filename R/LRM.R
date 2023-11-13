@@ -1,3 +1,22 @@
+#'LRM
+#'
+#'Fit a linear regression model to inference and predict
+#'
+#'@param y the dependent variable
+#'
+#'@param x the independent invariable
+#'
+#'@param intercept model include the intercept term or not
+#'
+#'@return fitted model
+#'
+#'@examples
+#'lrm(mtcars$mpg, mtcars$wt)
+#'
+#'@export
+#'
+#'
+#'
 lrm <- function(y,x,intercept=TRUE){
   # estimation
   # Rcpp to get X inverse
@@ -26,12 +45,52 @@ lrm <- function(y,x,intercept=TRUE){
 }
 
 
+
+#'LRM_estimate
+#'
+#'Estimate the parameters of a linear regression model
+#'
+#'@param lr.model fitted linear regression using lrm
+#'
+#'@return estimated parameters and standard error
+#'
+#'@examples
+#'m = lrm(mtcars$mpg, mtcars$wt)
+#'lrm.estimate(m)
+#'
+#'@export
+#'
+#'
+#'
 lrm.estimate <- function(lr.model){
   cbind(Estimate = c(beta.hat),
         Std.Err = se.beta.hat)
 }
 
 
+
+#'LRM_Ftest
+#'
+#'Test the sigificance of parameters of a fitted linear regression model
+#'
+#'@param lr.model the fitted linear regression model
+#'
+#'@param alpha the significance level
+#'
+#'@param interpretation print the result of hypothesis testing
+#'
+#'@param anova print anova table
+#'
+#'@return hypothesis testing result
+#'
+#'@examples
+#'m = lrm(mtcars$mpg, mtcars$wt)
+#'lrm.Ftest(m)
+#'
+#'@export
+#'
+#'
+#'
 lrm.Ftest <- function(lr.model, alpha=0.05, interpretation=TRUE, anova=TRUE){
   # hypothesis testing
   F.stat <<- MSR/MSE
@@ -59,6 +118,31 @@ lrm.Ftest <- function(lr.model, alpha=0.05, interpretation=TRUE, anova=TRUE){
 }
 
 
+
+#'LRM_partialtest
+#'
+#'Test the significance of one parameter of a fitted linear regression model
+#'
+#'@param lr.model the fitted linear regression model
+#'
+#'@param test.variable the chosen parameter to be tested
+#'
+#'@param alpha the significance level
+#'
+#'@param interpretation print the result of hypothesis testing
+#'
+#'@param anova print anova table
+#'
+#'@return hypothesis testing result
+#'
+#'@examples
+#'m = lrm(mtcars$mpg, mtcars$wt)
+#'lrm.partialtest(m, 2)
+#'
+#'@export
+#'
+#'
+#'
 lrm.partialtest <- function(lr.model, test.variable, alpha=0.05, confidence.interval=TRUE, interpretation=TRUE){
   # test.variable is the index of beta
   i <- test.variable
@@ -81,7 +165,27 @@ lrm.partialtest <- function(lr.model, test.variable, alpha=0.05, confidence.inte
 }
 
 
-
+#'LRM_GLH
+#'
+#'Global hypothesis test of a subset of parameters in a fitted linear regression model
+#'
+#'@param lr.model the fitted linear regression model
+#'
+#'@param test.matrix contrast matrix
+#'
+#'@param interpretation print the result of hypothesis testing
+#'
+#'@return hypothesis testing result
+#'
+#'@examples
+#'m = lrm(mtcars$mpg, mtcars$wt)
+#'T = as.matrix(c(1,-1))
+#'lrm.GLH(m)
+#'
+#'@export
+#'
+#'
+#'
 lrm.GLH <- function(lr.model, test.matrix, interpretation=TRUE){
   c <- rep(0, nrow(test.matrix))
   rank.T <- qr(test.matrix)$rank
