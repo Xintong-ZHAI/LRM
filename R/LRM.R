@@ -165,6 +165,7 @@ lrm.partialtest <- function(lr.model, test.variable, alpha=0.05, confidence.inte
 }
 
 
+
 #'LRM_GLH
 #'
 #'Global hypothesis test of a subset of parameters in a fitted linear regression model
