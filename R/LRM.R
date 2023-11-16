@@ -24,10 +24,10 @@ lrm <- function(y,x,intercept=TRUE){
   # Rcpp to get X inverse
   X <<- as.matrix(x)
   Y <<- as.matrix(y)
+  n <<- nrow(X)
   if(intercept == TRUE){
     X <<- cbind(rep(1,n),X)
   }
-  n <<- nrow(X)
   p <<- ncol(X)
   beta.hat <<- lrm_coef(X, Y)
   Y.hat <<- X%*%beta.hat
