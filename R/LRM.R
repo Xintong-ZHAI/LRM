@@ -17,6 +17,8 @@
 #'
 #'
 #'
+library(Rcpp)
+sourceCpp("./Cplusplus/lrm_Cpp.cpp")
 lrm <- function(y,x,intercept=TRUE){
   # estimation
   # Rcpp to get X inverse
@@ -27,11 +29,11 @@ lrm <- function(y,x,intercept=TRUE){
   }
   n <<- nrow(X)
   p <<- ncol(X)
-  beta.hat <<- solve(t(X)%*%X)%*%t(X)%*%Y
+  beta.hat <<- lrm_coef(X, Y)
   Y.hat <<- X%*%beta.hat
   residual <<- Y-Y.hat
-  sigmasquare.hat <<- t(residual)%*%residual/(n-p)
-  var.beta.hat <<- diag( solve(t(X)%*%X) )*c(sigmasquare.hat)
+  sigmasquare.hat <<- crossprod(residual)/(n-p)
+  var.beta.hat <<- diag( solve(crossprod(residual)) )*c(sigmasquare.hat)
   se.beta.hat <<- sqrt(var.beta.hat)
   t.stat <<- c(beta.hat/se.beta.hat)
   pvalue.t <<- c(2*( 1-pt(q=abs(t.stat),df=n-p) ))
@@ -191,7 +193,7 @@ lrm.GLH <- function(lr.model, test.matrix, interpretation=TRUE){
   c <- rep(0, nrow(test.matrix))
   rank.T <- qr(test.matrix)$rank
   vec.GLH <- test.matrix%*%beta.hat-c
-  mat.GLH <- test.matrix%*%solve(t(X)%*%X)%*%t(test.matrix)
+  mat.GLH <- test.matrix%*%solve(crossprod(X))%*%t(test.matrix)
   F.stat.GLH <- t(vec.GLH)%*%solve(mat.GLH)%*%vec.GLH/rank.T/MSE
   pvalue.F.GLH <- 1-pf(q=F.stat.GLH, df1=rank.T, df2=(n-p))
   GLH.mat <- cbind(F_statistic = c(F.stat.GLH), pvalue=c(pvalue.F.GLH))
