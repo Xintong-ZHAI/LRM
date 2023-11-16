@@ -17,11 +17,11 @@
 #'
 #'
 #'
-library(Rcpp)
-sourceCpp("./Cplusplus/lrm_Cpp.cpp")
+
 lrm <- function(y,x,intercept=TRUE){
   # estimation
   # Rcpp to get X inverse
+  sourceCpp("./Cplusplus/lrm_Cpp.cpp")
   X <<- as.matrix(x)
   Y <<- as.matrix(y)
   n <<- nrow(X)
