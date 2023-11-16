@@ -33,7 +33,7 @@ lrm <- function(y,x,intercept=TRUE){
   Y.hat <<- X%*%beta.hat
   residual <<- Y-Y.hat
   sigmasquare.hat <<- crossprod(residual)/(n-p)
-  var.beta.hat <<- diag( solve(crossprod(residual)) )*c(sigmasquare.hat)
+  var.beta.hat <<- diag( solve(crossprod(X)) )*c(sigmasquare.hat)
   se.beta.hat <<- sqrt(var.beta.hat)
   t.stat <<- c(beta.hat/se.beta.hat)
   pvalue.t <<- c(2*( 1-pt(q=abs(t.stat),df=n-p) ))
