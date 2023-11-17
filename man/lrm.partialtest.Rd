@@ -30,6 +30,8 @@ hypothesis testing result
 Test the significance of one parameter of a fitted linear regression model
 }
 \examples{
+library(Rcpp)
+sourceCpp("~/lrm/Cplusplus/lrm_Cpp.cpp")
 m = lrm(mtcars$mpg, mtcars$wt)
 lrm.partialtest(m, 2)
 

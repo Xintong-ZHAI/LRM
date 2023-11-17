@@ -1,3 +1,7 @@
+library(Rcpp)
+library(lrm)
+sourceCpp("~/lrm/Cplusplus/lrm_Cpp.cpp")
+
 test_that("lrm works", {
   m1 = lrm(mtcars$mpg, mtcars$wt)
   expect_equivalent(round(lrm.estimate(m1)[,1],3),

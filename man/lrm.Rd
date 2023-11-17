@@ -20,6 +20,8 @@ fitted model
 Fit a linear regression model to inference and predict
 }
 \examples{
-lrm(mtcars$mpg, mtcars$wt)
+library(Rcpp)
+sourceCpp("~/lrm/Cplusplus/lrm_Cpp.cpp")
+m=lrm(mtcars$mpg, mtcars$wt)
 
 }

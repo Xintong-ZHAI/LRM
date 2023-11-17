@@ -32,7 +32,8 @@ lrm.estimate(m)
 ```
 
 ```{r}
-summary(lm(mpg~wt, data = mtcars))
+m2 = lm(mpg~wt, data = mtcars)
+summary(m2)
 ```
 
 ```{r}

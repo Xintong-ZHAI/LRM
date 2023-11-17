@@ -20,8 +20,10 @@ hypothesis testing result
 Global hypothesis test of a subset of parameters in a fitted linear regression model
 }
 \examples{
+library(Rcpp)
+sourceCpp("~/lrm/Cplusplus/lrm_Cpp.cpp")
 m = lrm(mtcars$mpg, mtcars$wt)
-T = as.matrix(c(1,-1))
-lrm.GLH(m)
+T = matrix(c(0,1),nrow=1, ncol=2)
+lrm.GLH(m, T)
 
 }

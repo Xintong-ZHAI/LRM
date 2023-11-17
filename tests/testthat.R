@@ -8,7 +8,6 @@
 
 library(testthat)
 library(lrm)
-library(Rcpp)
-sourceCpp("~/lrm/Cplusplus/lrm_Cpp.cpp")
+
 
 test_check("lrm")

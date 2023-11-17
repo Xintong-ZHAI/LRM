@@ -11,7 +11,9 @@
 #'@return fitted model
 #'
 #'@examples
-#'lrm(mtcars$mpg, mtcars$wt)
+#'library(Rcpp)
+#'sourceCpp("~/lrm/Cplusplus/lrm_Cpp.cpp")
+#'m=lrm(mtcars$mpg, mtcars$wt)
 #'
 #'@export
 #'
@@ -55,6 +57,8 @@ lrm <- function(y,x,intercept=TRUE){
 #'@return estimated parameters and standard error
 #'
 #'@examples
+#'library(Rcpp)
+#'sourceCpp("~/lrm/Cplusplus/lrm_Cpp.cpp")
 #'m = lrm(mtcars$mpg, mtcars$wt)
 #'lrm.estimate(m)
 #'
@@ -84,6 +88,8 @@ lrm.estimate <- function(lr.model){
 #'@return hypothesis testing result
 #'
 #'@examples
+#'library(Rcpp)
+#'sourceCpp("~/lrm/Cplusplus/lrm_Cpp.cpp")
 #'m = lrm(mtcars$mpg, mtcars$wt)
 #'lrm.Ftest(m)
 #'
@@ -136,6 +142,8 @@ lrm.Ftest <- function(lr.model, alpha=0.05, interpretation=TRUE, anova=TRUE){
 #'@return hypothesis testing result
 #'
 #'@examples
+#'library(Rcpp)
+#'sourceCpp("~/lrm/Cplusplus/lrm_Cpp.cpp")
 #'m = lrm(mtcars$mpg, mtcars$wt)
 #'lrm.partialtest(m, 2)
 #'
@@ -179,9 +187,11 @@ lrm.partialtest <- function(lr.model, test.variable, alpha=0.05, confidence.inte
 #'@return hypothesis testing result
 #'
 #'@examples
+#'library(Rcpp)
+#'sourceCpp("~/lrm/Cplusplus/lrm_Cpp.cpp")
 #'m = lrm(mtcars$mpg, mtcars$wt)
-#'T = as.matrix(c(1,-1))
-#'lrm.GLH(m)
+#'T = matrix(c(0,1),nrow=1, ncol=2)
+#'lrm.GLH(m, T)
 #'
 #'@export
 #'

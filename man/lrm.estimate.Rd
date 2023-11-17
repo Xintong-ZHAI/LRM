@@ -16,6 +16,8 @@ estimated parameters and standard error
 Estimate the parameters of a linear regression model
 }
 \examples{
+library(Rcpp)
+sourceCpp("~/lrm/Cplusplus/lrm_Cpp.cpp")
 m = lrm(mtcars$mpg, mtcars$wt)
 lrm.estimate(m)
 

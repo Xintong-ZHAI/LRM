@@ -22,6 +22,8 @@ hypothesis testing result
 Test the sigificance of parameters of a fitted linear regression model
 }
 \examples{
+library(Rcpp)
+sourceCpp("~/lrm/Cplusplus/lrm_Cpp.cpp")
 m = lrm(mtcars$mpg, mtcars$wt)
 lrm.Ftest(m)
 
