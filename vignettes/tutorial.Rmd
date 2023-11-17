@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 library(lrm)
 library(Rcpp)
 sourceCpp("~/lrm/Cplusplus/lrm_Cpp.cpp")
+
 ```
 
 ```{r}
