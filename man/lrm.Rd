@@ -14,10 +14,13 @@ lrm(y, x, intercept = TRUE)
 \item{intercept}{model include the intercept term or not}
 }
 \value{
+coefficient matrix
+
 fitted model
 }
 \description{
-Fit a linear regression model to inference and predict
+This package is used to fit a linear regression model to inference and predict
+C++ is used to accelerate calculation
 }
 \examples{
 library(Rcpp)

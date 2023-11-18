@@ -19,9 +19,9 @@ lrm.partialtest(
 
 \item{alpha}{the significance level}
 
-\item{interpretation}{print the result of hypothesis testing}
+\item{confidence.interval}{print the confidence interval}
 
-\item{anova}{print anova table}
+\item{interpretation}{print the result of hypothesis testing}
 }
 \value{
 hypothesis testing result
