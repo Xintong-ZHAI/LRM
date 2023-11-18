@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(lrm)
+install.packages("Rcpp")
 library(Rcpp)
 sourceCpp("~/lrm/Cplusplus/lrm_Cpp.cpp")
 
