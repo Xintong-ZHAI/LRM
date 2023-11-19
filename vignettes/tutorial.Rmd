@@ -14,41 +14,56 @@ knitr::opts_chunk$set(
 )
 ```
 
+# load packages
 ```{r setup}
 library(lrm)
 install.packages("Rcpp")
 library(Rcpp)
-sourceCpp("~/lrm/Cplusplus/lrm_Cpp.cpp")
-
+sourceCpp("~/lrm/src/lrm_Cpp.cpp")
 ```
-
-```{r}
-head(iris)
-```
-
+# load dataset
 ```{r}
 X.vec <- mtcars$wt
 Y <- mtcars$mpg
-m <- lrm(Y, X.vec)
-lrm.estimate(m)
 ```
 
+# fit the model with lrm
+estimate the parameters
+```{r}
+m <- lrm(Y, X.vec)
+```
+
+F-test of the whole model
+```{r}
+m <- lrm(Y, X.vec, estimate=FALSE, anova=TRUE, Ftest=TRUE)
+```
+
+partial-test of selected parameter
+```{r}
+m <- lrm(Y, X.vec, test.variable=2, estimate=FALSE, partialtest=TRUE)
+```
+
+GLH of a subset of parameters
+```{r}
+m <- lrm(Y, X.vec, test.matrix=matrix(c(0,1),nrow=1,ncol=2), estimate=FALSE, GLH=TRUE)
+```
+
+# Compared with the results in lm function
 ```{r}
 m2 = lm(mpg~wt, data = mtcars)
 summary(m2)
 ```
 
 ```{r}
-lrm.Ftest(m)
-```
-
-```{r}
-lrm.GLH(m,matrix(c(0,1),nrow=1,ncol=2))
-```
-
-```{r}
+library(car)
 contrast.T = matrix(c(0,1),nrow=1, ncol=2)
-car::linearHypothesis(model=lm(mpg~wt, data = mtcars), hypothesis.matrix=contrast.T, rhs=c(0))
+linearHypothesis(model=lm(mpg~wt, data = mtcars), hypothesis.matrix=contrast.T, rhs=c(0))
 ```
 
+# Time consumption
+```{r}
+system.time(summary(lm(mpg~wt, data=mtcars)))
+system.time(lrm(Y, X.vec))
+
+```
 

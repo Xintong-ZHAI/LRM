@@ -32,11 +32,6 @@
 #'
 #'@param GLH "TRUE" means conduct GLH, "FLASE" means not
 #'
-#'@useDynLib lrm
-#'@importFrom Rcpp sourceCpp
-#'@return coefficient matrix
-#'@export
-#'
 #'@return result of one specific hypothesis testing
 #'
 #'@examples

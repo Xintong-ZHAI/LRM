@@ -8,7 +8,9 @@
 [![R-CMD-check](https://github.com/Xintong-ZHAI/LRM/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Xintong-ZHAI/LRM/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of lrm is to …
+The goal of lrm is to estimate the parameters and test the significance
+of any given matrix X and vector Y by linear regression model. It
+conducts the hypothesis testing, including
 
 ## Installation
 
